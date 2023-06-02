@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+from dotenv import load_dotenv
 from pathlib import Path
 import environ
+
 
 
 env = environ.Env()
@@ -138,8 +140,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-PAYPAL_CLIENT_ID = env('PAYPAL_SANDBOX_CLIENT_ID')
-PAYPAL_SECRET_ID = env('PAYPAL_SANDBOX_SECRET_KEY')
+PAYPAL_CLIENT_ID = os.getenv('PAYPAL_SANDBOX_CLIENT_ID')
+PAYPAL_SECRET_ID = os.getenv('PAYPAL_SANDBOX_SECRET_KEY')
 
 PAYPAL_RECEIVER_EMAIL = env('PAYPAL_RECEIVER_EMAIL')
 PAYPAL_TEST = env('PAYPAL_TEST', default=False, cast=bool)
