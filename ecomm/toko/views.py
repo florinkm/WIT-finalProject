@@ -83,7 +83,7 @@ class PaymentView(LoginRequiredMixin, generic.FormView):
                 'amount': order.get_total_harga_order,
                 'item_name': f'Pembayaran belajanan order: {order.id}',
                 'invoice': f'{order.id}-{timezone.now().timestamp()}' ,
-                'currency_code': 'USD',
+                'currency_code': 'IDR',
                 'notify_url': self.request.build_absolute_uri(reverse('paypal-ipn')),
                 'return_url': self.request.build_absolute_uri(reverse('toko:paypal-return')),
                 'cancel_return': self.request.build_absolute_uri(reverse('toko:paypal-cancel')),
