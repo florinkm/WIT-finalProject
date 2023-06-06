@@ -4,9 +4,10 @@ from django.db import models
 from django.urls import reverse
 
 PILIHAN_KATEGORI = (
-    ('S', 'Shirt'),
-    ('SW', 'Sport wear'),
-    ('OW', 'Outwear')
+    ('DL', 'Detergent Laundry'),
+    ('AN', 'Anti Noda'),
+    ('PL', 'Pelengkap Laundry'),
+    ('ML', 'Mesin Laundry')
 )
 
 PILIHAN_LABEL = (
@@ -22,6 +23,12 @@ PILIHAN_PEMBAYARAN = (
 
 User = get_user_model()
 
+class Category(models.Model):
+    pkategori = models.Charfield(choices=PILIHAN_KATEGORI, max_length=2)
+
+    def __str__(self):
+        return self.pkategori
+
 class ProdukItem(models.Model):
     nama_produk = models.CharField(max_length=100)
     harga = models.FloatField()
@@ -30,7 +37,8 @@ class ProdukItem(models.Model):
     deskripsi = models.TextField()
     gambar = models.ImageField(upload_to='product_pics')
     label = models.CharField(choices=PILIHAN_LABEL, max_length=4)
-    kategori = models.CharField(choices=PILIHAN_KATEGORI, max_length=2)
+    kategori = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    #kategori = models.CharField(choices=PILIHAN_KATEGORI, max_length=2)
 
     def __str__(self):
         return f"{self.nama_produk} - ${self.harga}"
