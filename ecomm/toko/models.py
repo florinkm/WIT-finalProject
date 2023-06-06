@@ -24,7 +24,7 @@ PILIHAN_PEMBAYARAN = (
 User = get_user_model()
 
 class Category(models.Model):
-    pkategori = models.Charfield(choices=PILIHAN_KATEGORI, max_length=2)
+    pkategori = models.CharField(choices=PILIHAN_KATEGORI, max_length=2)
 
     def __str__(self):
         return self.pkategori
