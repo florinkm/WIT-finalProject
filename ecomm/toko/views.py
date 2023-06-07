@@ -1,12 +1,15 @@
+from typing import Any
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models.query import QuerySet
 from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.utils import timezone
 from django.views import generic
 from paypal.standard.forms import PayPalPaymentsForm
 
+from django.db.models import Q
 
 from .forms import CheckoutForm
 from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment
@@ -83,7 +86,7 @@ class PaymentView(LoginRequiredMixin, generic.FormView):
                 'amount': order.get_total_harga_order,
                 'item_name': f'Pembayaran belajanan order: {order.id}',
                 'invoice': f'{order.id}-{timezone.now().timestamp()}' ,
-                'currency_code': 'USD',
+                'currency_code': 'IDR',
                 'notify_url': self.request.build_absolute_uri(reverse('paypal-ipn')),
                 'return_url': self.request.build_absolute_uri(reverse('toko:paypal-return')),
                 'cancel_return': self.request.build_absolute_uri(reverse('toko:paypal-cancel')),
@@ -212,3 +215,32 @@ def paypal_return(request):
 def paypal_cancel(request):
     messages.error(request, 'Pembayaran dibatalkan')
     return redirect('toko:order-summary')
+
+class DetergentLaundryView(generic.ListView):
+    
+    template_name = 'dl.html'
+    queryset = ProdukItem.objects.filter(kategori='DL')
+
+class AntiNodaView(generic.ListView):
+    template_name = 'an.html'
+    queryset = ProdukItem.objects.filter(kategori='AN')
+
+class PelengkapLaundryView(generic.ListView):
+    template_name = 'pl.html'
+    queryset = ProdukItem.objects.filter(kategori='PL')
+
+class MesinLaundryView(generic.ListView):
+    template_name = 'ml.html'
+    queryset = ProdukItem.objects.filter(kategori='ML')
+
+class SearchResultView(generic.ListView):
+    model = ProdukItem
+    template_name = 'search.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get("search")
+        object_list = ProdukItem.objects.filter(
+            Q(nama_produk__icontains=query) | Q(harga__icontains=query)
+        )
+
+        return object_list

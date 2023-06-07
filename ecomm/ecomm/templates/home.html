@@ -36,23 +36,24 @@
                             <a class="nav-link text-white" href="#">Semua</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Deterjen Laundry</a>
+                            <a class="nav-link text-white" href="{% url 'toko:detergent-laundry' %}">Deterjen Laundry</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Anti Noda</a>
+                            <a class="nav-link text-white" href="{% url 'toko:anti-noda' %}">Anti Noda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Pelengkap Laundry</a>
+                            <a class="nav-link text-white" href="{% url 'toko:pelengkap-laundry' %}">Pelengkap Laundry</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Mesin Laundry</a>
+                            <a class="nav-link text-white" href="{% url 'toko:mesin-laundry' %}">Mesin Laundry</a>
                         </li>
 
                     </ul>
 
                     <!-- Search -->
-                    <form class="w-auto py-1" style="max-width: 12rem">
-                        <input type="search" class="form-control rounded-0" placeholder="Search" aria-label="Search">
+                    <form action="{% url 'toko:search' %}" method="get" class="w-auto py-1" style="max-width: 12rem">
+                        <input type="text" name="search" class="form-control rounded-0" placeholder="Search" aria-label="Search">
+                        <!-- <input type="submit" value="Search"> -->
                     </form>
 
                 </div>

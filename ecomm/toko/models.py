@@ -38,10 +38,14 @@ class ProdukItem(models.Model):
     gambar = models.ImageField(upload_to='product_pics')
     label = models.CharField(choices=PILIHAN_LABEL, max_length=4)
     kategori = models.CharField(choices=PILIHAN_KATEGORI, max_length=2)
+<<<<<<< HEAD
     #kategori = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
 
+=======
+   
+>>>>>>> d209cba14f0b48bd932a39fe7b9b8fed4b4bdba8
     def __str__(self):
-        return f"{self.nama_produk} - ${self.harga}"
+        return f"{self.nama_produk} - Rp{self.harga}"
 
     def get_absolute_url(self):
         return reverse("toko:produk-detail", kwargs={
