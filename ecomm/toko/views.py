@@ -7,7 +7,6 @@ from django.utils import timezone
 from django.views import generic
 from paypal.standard.forms import PayPalPaymentsForm
 
-
 from .forms import CheckoutForm
 from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment
 
@@ -212,3 +211,20 @@ def paypal_return(request):
 def paypal_cancel(request):
     messages.error(request, 'Pembayaran dibatalkan')
     return redirect('toko:order-summary')
+
+class DetergentLaundryView(generic.ListView):
+    
+    template_name = 'dl.html'
+    queryset = ProdukItem.objects.filter(kategori='DL')
+
+class AntiNodaView(generic.ListView):
+    template_name = 'an.html'
+    queryset = ProdukItem.objects.filter(kategori='AN')
+
+class PelengkapLaundryView(generic.ListView):
+    template_name = 'pl.html'
+    queryset = ProdukItem.objects.filter(kategori='PL')
+
+class MesinLaundryView(generic.ListView):
+    template_name = 'ml.html'
+    queryset = ProdukItem.objects.filter(kategori='ML')

@@ -13,4 +13,8 @@ urlpatterns = [
      path('payment/<payment_method>', views.PaymentView.as_view(), name='payment'),
      path('paypal-return/', views.paypal_return, name='paypal-return'),
      path('paypal-cancel/', views.paypal_cancel, name='paypal-cancel'),
+     path('detergent-laundry/',views.DetergentLaundryView.as_view(), name='detergent-laundry'),
+     path('anti-noda/',views.AntiNodaView.as_view(), name='anti-noda'),
+     path('pelengkap-laundry/',views.PelengkapLaundryView.as_view(), name='pelengkap-laundry'),
+     path('mesin-laundry/',views.MesinLaundryView.as_view(), name='mesin-laundry')
 ]
