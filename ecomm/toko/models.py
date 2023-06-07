@@ -23,12 +23,6 @@ PILIHAN_PEMBAYARAN = (
 
 User = get_user_model()
 
-"""class Category(models.Model):
-    pkategori = models.CharField(choices=PILIHAN_KATEGORI, max_length=2)
-
-    def __str__(self):
-        return self.pkategori"""
-
 class ProdukItem(models.Model):
     nama_produk = models.CharField(max_length=100)
     harga = models.FloatField()
@@ -38,8 +32,7 @@ class ProdukItem(models.Model):
     gambar = models.ImageField(upload_to='product_pics')
     label = models.CharField(choices=PILIHAN_LABEL, max_length=4)
     kategori = models.CharField(choices=PILIHAN_KATEGORI, max_length=2)
-    #kategori = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-
+   
     def __str__(self):
         return f"{self.nama_produk} - Rp{self.harga}"
 
