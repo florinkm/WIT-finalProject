@@ -1,11 +1,15 @@
+from typing import Any
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models.query import QuerySet
 from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.utils import timezone
 from django.views import generic
 from paypal.standard.forms import PayPalPaymentsForm
+
+from django.db.models import Q
 
 from .forms import CheckoutForm
 from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment
@@ -228,3 +232,15 @@ class PelengkapLaundryView(generic.ListView):
 class MesinLaundryView(generic.ListView):
     template_name = 'ml.html'
     queryset = ProdukItem.objects.filter(kategori='ML')
+
+class SearchResultView(generic.ListView):
+    model = ProdukItem
+    template_name = 'search.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get("search")
+        object_list = ProdukItem.objects.filter(
+            Q(nama_produk__icontains=query) | Q(harga__icontains=query)
+        )
+
+        return object_list

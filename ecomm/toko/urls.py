@@ -16,5 +16,6 @@ urlpatterns = [
      path('detergent-laundry/',views.DetergentLaundryView.as_view(), name='detergent-laundry'),
      path('anti-noda/',views.AntiNodaView.as_view(), name='anti-noda'),
      path('pelengkap-laundry/',views.PelengkapLaundryView.as_view(), name='pelengkap-laundry'),
-     path('mesin-laundry/',views.MesinLaundryView.as_view(), name='mesin-laundry')
+     path('mesin-laundry/',views.MesinLaundryView.as_view(), name='mesin-laundry'),
+     path('search-result', views.SearchResultView.as_view(), name='search')
 ]

@@ -51,8 +51,9 @@
                     </ul>
 
                     <!-- Search -->
-                    <form class="w-auto py-1" style="max-width: 12rem">
-                        <input type="search" class="form-control rounded-0" placeholder="Search" aria-label="Search">
+                    <form action="{% url 'toko:search' %}" method="get" class="w-auto py-1" style="max-width: 12rem">
+                        <input type="text" name="search" class="form-control rounded-0" placeholder="Search" aria-label="Search">
+                        <!-- <input type="submit" value="Search"> -->
                     </form>
 
                 </div>
